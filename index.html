@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Evaluaciones Grupo 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#effaf9; --bg2:#d9f3f0; --card:#ffffff; --ink:#0b3b3c; --muted:#4d7476;
+  --teal:#0fa3a3; --teal-d:#0a7c7e; --teal-l:#bdeeea; --line:#cfe9e6;
+  --ok:#0f9d6b; --okbg:#dcf7ec; --bad:#c2410c; --badbg:#ffe9df;
+  --shadow:0 10px 30px rgba(10,124,126,.12);
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#06292b; --bg2:#0a3a3d; --card:#0c3c3f; --ink:#e6fbf9; --muted:#8dc4c2;
+    --teal:#2dd4cf; --teal-d:#5eead4; --teal-l:#14595c; --line:#17575a;
+    --okbg:#0d4a3a; --badbg:#4a2514; --ok:#4ade9f; --bad:#fb9a6a; --shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#06292b; --bg2:#0a3a3d; --card:#0c3c3f; --ink:#e6fbf9; --muted:#8dc4c2;
+  --teal:#2dd4cf; --teal-d:#5eead4; --teal-l:#14595c; --line:#17575a;
+  --okbg:#0d4a3a; --badbg:#4a2514; --ok:#4ade9f; --bad:#fb9a6a; --shadow:0 10px 30px rgba(0,0,0,.35);
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1200px 600px at 10% -10%,var(--bg2),transparent 60%),var(--bg);
+  color:var(--ink);font-family:'DM Sans',system-ui,sans-serif;min-height:100vh;line-height:1.5}
+.wrap{max-width:860px;margin:0 auto;padding:28px 18px 60px}
+header{text-align:center;padding:26px 0 10px}
+.badge{display:inline-block;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal-d);
+  background:var(--teal-l);padding:6px 14px;border-radius:99px;font-weight:700}
+h1{font-family:'Fraunces',Georgia,serif;font-weight:700;font-size:clamp(34px,7vw,56px);margin:14px 0 6px;letter-spacing:-.02em;
+  background:linear-gradient(90deg,var(--teal-d),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--muted);margin:0 auto;max-width:520px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:24px;margin-top:22px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:600px){.row{grid-template-columns:1fr}}
+label{display:block;font-size:13px;font-weight:700;color:var(--teal-d);margin-bottom:6px;letter-spacing:.03em}
+input[type=text],input[type=date]{width:100%;padding:13px 14px;border-radius:12px;border:1.5px solid var(--line);
+  background:var(--bg);color:var(--ink);font:inherit;outline:none;transition:.2s}
+input:focus{border-color:var(--teal);box-shadow:0 0 0 4px var(--teal-l)}
+h2{font-family:'Fraunces',serif;font-size:24px;margin:0 0 4px}
+.evals{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+@media(max-width:600px){.evals{grid-template-columns:1fr}}
+.ev{all:unset;box-sizing:border-box;cursor:pointer;display:block;padding:18px;border-radius:18px;border:1.5px solid var(--line);
+  background:var(--bg);transition:.2s;position:relative}
+.ev:hover{transform:translateY(-2px);border-color:var(--teal);box-shadow:var(--shadow)}
+.ev:focus-visible{outline:3px solid var(--teal)}
+.ev .n{font-family:'Fraunces',serif;font-size:34px;color:var(--teal);line-height:1}
+.ev .t{font-weight:700;margin-top:6px}
+.ev .m{font-size:13px;color:var(--muted)}
+.ev .done{position:absolute;top:12px;right:14px;font-size:12px;font-weight:700;color:var(--ok);background:var(--okbg);padding:3px 9px;border-radius:99px}
+.btn{cursor:pointer;border:0;border-radius:14px;padding:13px 22px;font:inherit;font-weight:700;transition:.2s}
+.btn.p{background:linear-gradient(135deg,var(--teal),var(--teal-d));color:#fff;box-shadow:0 8px 20px rgba(15,163,163,.3)}
+.btn.p:hover{transform:translateY(-1px)}
+.btn.p:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.btn.g{background:transparent;color:var(--teal-d);border:1.5px solid var(--line)}
+.btn.g:hover{border-color:var(--teal)}
+.err{color:var(--bad);font-size:14px;margin-top:10px;min-height:20px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+.bar{height:8px;border-radius:99px;background:var(--teal-l);overflow:hidden;margin:12px 0 22px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--teal-d));border-radius:99px;transition:width .35s}
+.case{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-d);font-weight:700}
+.q{font-family:'Fraunces',serif;font-size:clamp(20px,3.6vw,26px);margin:6px 0 18px;line-height:1.3}
+.opt{all:unset;box-sizing:border-box;display:flex;gap:12px;align-items:flex-start;width:100%;cursor:pointer;
+  padding:14px 16px;border:1.5px solid var(--line);border-radius:14px;margin-bottom:10px;background:var(--bg);transition:.15s}
+.opt:hover{border-color:var(--teal)}
+.opt:focus-visible{outline:3px solid var(--teal)}
+.opt .l{flex:none;width:28px;height:28px;border-radius:50%;background:var(--teal-l);color:var(--teal-d);display:grid;place-items:center;font-weight:700;font-size:14px}
+.opt.sel{border-color:var(--teal);background:var(--teal-l)}
+.opt.sel .l{background:var(--teal);color:#fff}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:18px}
+.score{text-align:center}
+.ring{width:150px;height:150px;border-radius:50%;margin:10px auto;display:grid;place-items:center;
+  background:conic-gradient(var(--teal) calc(var(--p)*1%),var(--teal-l) 0)}
+.ring div{width:118px;height:118px;border-radius:50%;background:var(--card);display:grid;place-items:center;
+  font-family:'Fraunces',serif;font-size:34px;font-weight:700;color:var(--teal-d)}
+.status{margin:14px auto;padding:10px 14px;border-radius:12px;font-size:14px;display:inline-block}
+.status.ok{background:var(--okbg);color:var(--ok)}
+.status.warn{background:var(--badbg);color:var(--bad)}
+.rev{border-top:1px solid var(--line);padding:14px 0}
+.rev .a{font-size:14px;margin-top:4px}
+.good{color:var(--ok);font-weight:700}.bad{color:var(--bad);font-weight:700}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{color:var(--teal-d);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.scroll{overflow-x:auto}
+.foot{text-align:center;margin-top:26px}
+.link{background:none;border:0;color:var(--teal-d);cursor:pointer;font:inherit;text-decoration:underline}
+.hide{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="badge">Plataforma de formación</span>
+    <h1>Evaluaciones Grupo 1</h1>
+    <p class="sub">Ingresa tus datos, elige la evaluación que vas a responder y recibe tu resultado al instante.</p>
+  </header>
+  <main id="app"></main>
+  <div class="foot"><button class="link hide" id="adminLink">Panel del creador (resultados)</button></div>
+</div>
+
+<script>
+const EVALS = [
+ {id:"e1", n:1, title:"Perfilamiento de un cliente", qs:[
+  {t:"¿Qué es el perfilamiento de un cliente?", o:["Una lista de clientes morosos","Una ficha con la información clave de cada cliente en mora, que define cómo y cuándo llamarlo","Un reporte financiero"], a:1},
+  {t:"¿Cuál es el objetivo del perfilamiento en cobranzas?", o:["Presionar al cliente para que pague","Hacer menos llamadas","Lograr el pago sin perder la relación con el cliente"], a:2},
+  {t:"¿Qué tipo de dato muestra si el cliente ha cumplido sus promesas de pago?", o:["Quién es","Cómo paga","Cómo contactarlo"], a:1},
+  {t:"Un cliente dice que no reconoce la deuda. ¿Qué dato del perfil es?", o:["Por qué está en mora","Quién es","Cómo contactarlo"], a:0},
+  {t:"¿Quién registra cada contacto y promesa de pago?", o:["El cliente","El asesor","Nadie, se hace solo"], a:1},
+  {t:"Verdadero o falso: con un buen perfil, todos los clientes se gestionan igual.", o:["Verdadero","Falso"], a:1, why:"Cada cliente necesita una llamada con un enfoque y una franja distintos."}
+ ]},
+ {id:"e2", n:2, title:"Introducción a Sistecrédito", qs:[
+  {t:"¿Qué es Sistecrédito?", o:["Una empresa de transporte","Un banco tradicional","Una compañía de seguros","Una plataforma de financiación y crédito"], a:3},
+  {t:"¿Cuál es el principal objetivo de Sistecrédito?", o:["Vender productos tecnológicos","Facilitar el acceso a financiación y conectar consumidores con comercios","Crear cuentas bancarias","Ofrecer únicamente tarjetas de crédito"], a:1},
+  {t:"¿Cómo funciona Sistecrédito para los consumidores?", o:["Permite financiar compras en comercios aliados","Entrega dinero sin ningún requisito","Funciona únicamente como una cuenta de ahorros","Solo permite comprar en línea"], a:0},
+  {t:"¿Qué permite la red de comercios aliados de Sistecrédito?", o:["Que los clientes tengan más opciones para utilizar la financiación","Que todos los productos sean gratuitos","Que no existan cuotas de pago","Que los comercios no tengan competencia"], a:0},
+  {t:"¿Qué impacto puede generar Sistecrédito en sus clientes?", o:["Garantizar ingresos mensuales","Eliminar todas sus deudas","Facilitar el acceso a productos y servicios mediante financiación","Evitar cualquier tipo de pago"], a:2},
+  {t:"¿Cuál de estas frases representa mejor la propuesta de Sistecrédito?", o:["“Comprar sin pensar en pagar”","“Conectar sueños con oportunidades”","“El banco de todos los colombianos”","“Comprar sin límites”"], a:1}
+ ]},
+ {id:"e3", n:3, title:"Función de un cobrador", qs:[
+  {c:"Caso 1", t:"Un cliente en mora dice: «Perdí mi empleo hace dos meses y no he podido pagar». ¿Qué respuesta refleja mejor al asesor VG (conexión y escucha activa)?", o:["«Eso no me interesa, la deuda es suya y debe pagarla ya.»","«Entiendo, perdió el empleo hace dos meses. Busquemos un pago que sí pueda cumplir.»","«¿Por qué no ha pagado? Explíqueme el motivo con detalle.»","«Si no paga hoy, lo reporto en centrales y se va a arrepentir.»"], a:1},
+  {c:"Caso 2", t:"Una cliente cuenta que estuvo hospitalizada un mes y por eso no pudo pagar su cuota. ¿Qué motivo de mora es?", o:["Socioeconómico","Personal","Administrativo","Ninguno de los tres"], a:1},
+  {c:"Caso 3", t:"El asesor ya rebatió la excusa, concientizó y ofreció alternativas. El cliente acepta pagar la mitad el viernes. ¿Cuál es el último paso para cerrar bien la promesa de pago?", o:["Colgar de inmediato para no perder tiempo","Volver a rebatir la excusa del cliente","Registrar fecha y monto y repetírselos al cliente para formalizar la promesa","Advertirle que, si falla, irá a cobro jurídico"], a:2},
+  {c:"Caso 4", t:"Durante una llamada, el asesor mantiene un tono persuasivo y firme, sin levantar la voz ni intimidar. ¿Qué rasgo del ADN del asesor está mostrando?", o:["Mente","Oído","Manos","Voz"], a:3}
+ ]},
+ {id:"e4", n:4, title:"Calidad ISO 9001", sub:"Tema 1.1 · Equipo 01", qs:[
+  {t:"¿Qué significan los valores RH+ de la Familia VG?", o:["Responsabilidad, Humildad y + Alegría","Respeto, Honestidad y + Actitud positiva","Rapidez, Honestidad y + Amabilidad","Respeto, Humanidad y + Resultados"], a:1},
+  {t:"¿Cuáles son las 4 fases del ciclo PHVA?", o:["Programar, Hacer, Validar y Archivar","Planificar, Hacer, Valorar y Auditar","Planificar, Hacer, Verificar y Actuar","Prevenir, Hacer, Verificar y Aprobar"], a:2},
+  {t:"¿Qué demuestra una organización que cumple la ISO 9001?", o:["Que todos sus productos y servicios son perfectos","Que nunca recibe quejas de sus clientes","Que no necesita auditorías","Que cuenta con un sistema de gestión ordenado para lograr resultados de calidad de forma constante"], a:3},
+  {t:"¿Qué significa «pensamiento basado en riesgos» en la ISO 9001?", o:["Corregir los errores solo cuando el cliente se queja","Anticiparse a lo que puede salir mal (o bien) para actuar antes de que ocurra","Evitar cualquier cambio en los procesos","Asumir riesgos sin medirlos para ganar velocidad"], a:1}
+ ]}
+];
+const WEBHOOK = ""; // Pega aquí la URL de tu Google Apps Script (ver instrucciones)
+const L = "ABCD";
+const app = document.getElementById("app");
+const state = {name:"", date:new Date().toISOString().slice(0,10), done:{}, ev:null, i:0, ans:[]};
+let dbRef = null, userRef = null, unsub = null;
+
+(async()=>{
+  try{ const c = window.claude; if(c){ dbRef = await c.use("db"); userRef = await c.use("user");
+    if(userRef && (await userRef.canEdit() || await userRef.isOwner())) document.getElementById("adminLink").classList.remove("hide"); } }catch(e){}
+})();
+document.getElementById("adminLink").onclick = showAdmin;
+
+const esc = s => String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function home(){
+  app.innerHTML = `
+  <section class="card">
+    <h2>Tus datos</h2>
+    <p class="sub" style="margin:0 0 16px;max-width:none">Se guardarán junto con tu resultado.</p>
+    <div class="row">
+      <div><label for="nm">Nombre completo</label><input id="nm" type="text" placeholder="Escribe tu nombre" value="${esc(state.name)}" autocomplete="name"></div>
+      <div><label for="dt">Fecha</label><input id="dt" type="date" value="${state.date}"></div>
+    </div>
+    <div class="err" id="err"></div>
+  </section>
+  <section class="card">
+    <h2>Elige la evaluación</h2>
+    <p class="sub" style="margin:0;max-width:none">Selecciona la que te corresponde responder.</p>
+    <div class="evals">
+      ${EVALS.map(e=>`<button class="ev" data-id="${e.id}">
+        ${state.done[e.id]!==undefined?`<span class="done">${state.done[e.id]}/${e.qs.length}</span>`:""}
+        <div class="n">${e.n}</div><div class="t">${esc(e.title)}</div>
+        <div class="m">${e.qs.length} preguntas${e.sub?" · "+esc(e.sub):""}</div></button>`).join("")}
+    </div>
+  </section>`;
+  document.getElementById("nm").oninput = e=>state.name=e.target.value;
+  document.getElementById("dt").oninput = e=>state.date=e.target.value;
+  app.querySelectorAll(".ev").forEach(b=>b.onclick=()=>{
+    state.name = document.getElementById("nm").value.trim(); state.date = document.getElementById("dt").value;
+    if(state.name.length<3){ document.getElementById("err").textContent="Escribe tu nombre completo para continuar."; document.getElementById("nm").focus(); return; }
+    if(!state.date){ document.getElementById("err").textContent="Selecciona la fecha."; return; }
+    start(b.dataset.id);
+  });
+}
+
+function start(id){ state.ev = EVALS.find(e=>e.id===id); state.i=0; state.ans=Array(state.ev.qs.length).fill(null); quiz(); window.scrollTo(0,0); }
+
+function quiz(){
+  const e=state.ev, q=e.qs[state.i], n=e.qs.length;
+  app.innerHTML = `
+  <section class="card">
+    <div class="top"><span><b>Evaluación ${e.n}</b> · ${esc(e.title)}</span><span>${esc(state.name)}</span></div>
+    <div class="bar"><i style="width:${(state.i/n)*100}%"></i></div>
+    <div class="case">${q.c?esc(q.c)+" · ":""}Pregunta ${state.i+1} de ${n}</div>
+    <div class="q">${state.i+1}. ${esc(q.t)}</div>
+    ${q.o.map((o,k)=>`<button class="opt ${state.ans[state.i]===k?"sel":""}" data-k="${k}"><span class="l">${L[k]}</span><span>${esc(o)}</span></button>`).join("")}
+    <div class="nav">
+      <button class="btn g" id="prev" ${state.i===0?"disabled style='opacity:.4'":""}>← Anterior</button>
+      <button class="btn p" id="next" ${state.ans[state.i]===null?"disabled":""}>${state.i===n-1?"Finalizar":"Siguiente →"}</button>
+    </div>
+    <div style="margin-top:14px"><button class="link" id="exit">Cambiar de evaluación</button></div>
+  </section>`;
+  app.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{ state.ans[state.i]=+b.dataset.k; quiz(); });
+  document.getElementById("prev").onclick=()=>{ if(state.i>0){state.i--;quiz();} };
+  document.getElementById("next").onclick=()=>{ if(state.i<n-1){state.i++;quiz();} else finish(); };
+  document.getElementById("exit").onclick=()=>{ if(confirm("¿Salir? Perderás el avance de esta evaluación.")) home(); };
+}
+
+function csvCell(v){ return '"'+String(v).replace(/"/g,'""')+'"'; }
+
+async function finish(){
+  const e=state.ev; const score=e.qs.reduce((s,q,k)=>s+(state.ans[k]===q.a?1:0),0);
+  state.done[e.id]=score;
+  const rec = {name:state.name, date:state.date, evalId:e.id, evalNum:e.n, evalTitle:e.title, score, total:e.qs.length,
+    pct:Math.round(score/e.qs.length*100), answers:state.ans.map((a,k)=>L[a]), ts:Date.now()};
+  state.last = rec;
+  render_result(rec, "saving");
+  let status="local";
+  if(dbRef && userRef){
+    try{
+      const uid = await userRef.id();
+      const ref = dbRef.collection("results").doc(uid);
+      let prev = {};
+      try{ const cur = await ref.get(); if(cur.exists) prev = {...(cur.data().attempts||{})}; }catch(e){}
+      prev[e.id] = rec;
+      await ref.set({uid, name:rec.name, updated:rec.ts, attempts:prev});
+      status="saved";
+    }catch(err){ status="local"; }
+  }
+  if(status!=="saved" && WEBHOOK){
+    try{ await fetch(WEBHOOK,{method:"POST",mode:"no-cors",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(rec)}); status="saved"; }catch(err){}
+  }
+  render_result(rec, status);
+}
+
+function render_result(rec, status){
+  const e=state.ev;
+  const st = status==="saving" ? `<div class="status ok">Guardando resultado…</div>`
+    : status==="saved" ? `<div class="status ok">✓ Tu resultado fue guardado y enviado al creador.</div>`
+    : `<div class="status warn">No se pudo guardar en línea. Usa “Descargar mi resultado” o “Copiar” y envíalo al creador.</div>`;
+  app.innerHTML = `
+  <section class="card score">
+    <div class="case">Evaluación ${e.n} · ${esc(e.title)}</div>
+    <div class="ring" style="--p:${rec.pct}"><div>${rec.score}/${rec.total}</div></div>
+    <h2>${rec.pct>=80?"¡Excelente trabajo!":rec.pct>=60?"Buen resultado":"Sigue practicando"}, ${esc(state.name.split(" ")[0])}</h2>
+    <p class="sub">${rec.pct}% de respuestas correctas · ${esc(state.date)}</p>
+    ${st}
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:6px">
+      <button class="btn p" id="home">Hacer otra evaluación</button>
+      <button class="btn g" id="dl">Descargar mi resultado</button>
+      <button class="btn g" id="cp">Copiar resultado</button>
+    </div>
+  </section>
+  <section class="card">
+    <h2>Revisión de respuestas</h2>
+    ${e.qs.map((q,k)=>{ const ok=state.ans[k]===q.a; return `<div class="rev">
+      <b>${k+1}. ${esc(q.t)}</b>
+      <div class="a">Tu respuesta: <span class="${ok?"good":"bad"}">${L[state.ans[k]]}) ${esc(q.o[state.ans[k]])} ${ok?"✓":"✗"}</span></div>
+      ${ok?"":`<div class="a">Correcta: <span class="good">${L[q.a]}) ${esc(q.o[q.a])}</span></div>`}
+      ${q.why?`<div class="a" style="color:var(--muted)">${esc(q.why)}</div>`:""}</div>`; }).join("")}
+  </section>`;
+  document.getElementById("home").onclick=home;
+  const text = `Evaluaciones Grupo 1 | ${rec.name} | ${rec.date} | Evaluación ${rec.evalNum}: ${rec.evalTitle} | ${rec.score}/${rec.total} (${rec.pct}%) | Respuestas: ${rec.answers.join(",")}`;
+  document.getElementById("cp").onclick=async()=>{ try{ await navigator.clipboard.writeText(text); document.getElementById("cp").textContent="¡Copiado!"; }catch(e){ prompt("Copia este texto:", text); } };
+  document.getElementById("dl").onclick=async()=>{
+    const csv = "Nombre,Fecha,Evaluacion,Puntaje,Total,Porcentaje,Respuestas\n"+[rec.name,rec.date,rec.evalNum+" - "+rec.evalTitle,rec.score,rec.total,rec.pct+"%",rec.answers.join(" ")].map(csvCell).join(",");
+    try{ const d = await window.claude.use("downloads"); if(d){ await d.save({filename:`resultado-${rec.evalNum}.csv`, data:csv}); return; } }catch(e){}
+    prompt("Copia este texto y envíalo al creador:", text);
+  };
+}
+
+function showAdmin(){
+  app.innerHTML = `<section class="card"><h2>Panel del creador</h2><p class="sub" style="max-width:none">Resultados recibidos en tiempo real.</p>
+    <div class="scroll"><table><thead><tr><th>Nombre</th><th>Fecha</th><th>Evaluación</th><th>Puntaje</th><th>%</th></tr></thead><tbody id="tb"><tr><td colspan="5">Cargando…</td></tr></tbody></table></div>
+    <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap"><button class="btn p" id="csv">Descargar todo (CSV)</button><button class="btn g" id="back">Volver</button></div></section>`;
+  let rows=[];
+  document.getElementById("back").onclick=()=>{ if(unsub) unsub(); unsub=null; home(); };
+  document.getElementById("csv").onclick=async()=>{
+    const csv="Nombre,Fecha,Evaluacion,Puntaje,Total,Porcentaje,Respuestas\n"+rows.map(r=>[r.name,r.date,r.evalNum+" - "+r.evalTitle,r.score,r.total,r.pct+"%",(r.answers||[]).join(" ")].map(csvCell).join(",")).join("\n");
+    try{ const d=await window.claude.use("downloads"); if(d) await d.save({filename:"resultados-evaluaciones-grupo-1.csv", data:"\ufeff"+csv}); }catch(e){}
+  };
+  if(!dbRef){ document.getElementById("tb").innerHTML='<tr><td colspan="5">Base de datos no disponible en esta vista.</td></tr>'; return; }
+  unsub = dbRef.collection("results").onSnapshot(snap=>{
+    rows = snap.docs.flatMap(d=>Object.values(d.data().attempts||{})).sort((a,b)=>b.ts-a.ts);
+    document.getElementById("tb").innerHTML = rows.length ? rows.map(r=>`<tr><td>${esc(r.name)}</td><td>${esc(r.date)}</td><td>${r.evalNum}. ${esc(r.evalTitle)}</td><td>${r.score}/${r.total}</td><td>${r.pct}%</td></tr>`).join("") : '<tr><td colspan="5">Aún no hay resultados.</td></tr>';
+  }, ()=>{ document.getElementById("tb").innerHTML='<tr><td colspan="5">No se pudieron leer los resultados.</td></tr>'; });
+}
+
+home();
+</script>
+</body>
+</html>
